@@ -4,49 +4,26 @@ A simple, vanilla HTML/CSS/JavaScript tool for planning crypto dip buy strategie
 
 ## How to Run
 
-This project requires no build step or dependencies. Simply open the HTML file in your web browser.
-
-### Option 1: Direct File Open
-1. Navigate to the project directory
-2. Double-click `index.html` to open it in your default browser
-
-### Option 2: Local Server (Recommended)
-For better compatibility and to avoid CORS issues, use a local server:
-
-**Using Python:**
-```bash
-# Python 3
-python -m http.server 8000
-
-# Python 2
-python -m SimpleHTTPServer 8000
-```
-
-**Using Node.js (http-server):**
-```bash
-npx http-server
-```
-
-**Using PHP:**
-```bash
-php -S localhost:8000
-```
-
-Then open `http://localhost:8000` in your browser.
-
-### Option 3: VS Code Live Server
-If using VS Code, install the "Live Server" extension and click "Go Live" in the status bar.
+Simply double-click `index.html` to open it in your web browser. No build step or dependencies required.
 
 ## Current Functionality
 
 ### Core Features
 
-- **Pair Name Input**: Text field for trading pair (e.g., BTC/USDT)
-- **Starting/Anchor Price**: Number input for reference price
-- **Current Price**: Number input to track current market price
-- **Coins Held**: Number input for existing coin holdings
-- **Cash Available**: USD amount available for buying
-- **Cash Deploy %**: Percentage of cash to allocate across dip levels
+- **Pair Name Input**: Text field for trading pair (e.g., BTC, ETH)
+- **Anchor / Starting Price**: Reference price used to calculate dip levels
+- **Current Holding Price**: Current market price (used to highlight reached dip levels)
+- **Coins Held**: Existing coin holdings included in calculations
+- **Cash Available (USD)**: Total USD cash available for buying
+- **Cash % To Deploy**: Percentage of available cash to allocate across dip levels
+
+### Multi-Pair Support
+
+- **Tabbed Interface**: Manage multiple trading pairs in one session
+- **Add Tab**: Create new pairs with the "+" button
+- **Close Tab**: Remove pairs (minimum 1 tab required)
+- **Switch Tabs**: Click tabs to switch between pairs
+- **Auto-save**: All pairs automatically saved to localStorage
 
 ### Dip Level Management
 
@@ -59,6 +36,7 @@ If using VS Code, install the "Live Server" extension and click "Go Live" in the
 - **Add Level Button**: Dynamically adds new dip levels
 - **Remove Level Button**: Removes individual levels (minimum 1 level enforced)
 - **Visual Feedback**: Reached dip levels highlighted in green when current price <= dip price
+- **Tooltips**: Hover over labels and headers for helpful explanations
 
 ### Summary Calculations
 
@@ -67,97 +45,57 @@ If using VS Code, install the "Live Server" extension and click "Go Live" in the
 - **Total Coins**: Existing holdings + all quantities from dip buys
 - **Projected Avg Entry**: Weighted average entry price including existing holdings
 
+### Pair Management
+
+- **Save Pair**: Save current pair configuration with a custom name
+- **Load Pair**: Load a previously saved pair from dropdown
+- **Export Pair**: Download current pair as JSON file
+- **Import Pair**: Import pair configuration from JSON file
+
+### Portfolio Management
+
+- **Save Portfolio**: Save entire portfolio (all pairs) with a custom name
+- **Load Portfolio**: Load a previously saved portfolio from dropdown
+- **Export Portfolio**: Download entire portfolio as JSON file
+- **Import Portfolio**: Import portfolio configuration from JSON file
+
 ### User Experience
 
-- **Auto-save**: All inputs saved to localStorage
-- **Reset Button**: Restores default values
+- **Auto-save**: All inputs automatically saved to localStorage
+- **Reset Button**: Restores current pair to default values
 - **Input Validation**: Clamps values to valid ranges
 - **Warning Messages**: Alerts when total buy % exceeds 100%
 - **Responsive Design**: Mobile-friendly layout
 - **Real-time Calculations**: Updates on every input change
+- **Focus Preservation**: Maintains input focus when levels are recalculated
 
 ### Default State
 
-- Pair: BTC/USDT
-- Anchor Price: $60,000
-- Current Price: $58,000
-- Coins Held: 0.5
-- Cash Available: $5,000
-- Cash Deploy %: 80%
-- 3 default levels: 5%, 10%, 15% dips with 20%, 30%, 50% allocations
+- Pair: BTC
+- Anchor Price: $100,000
+- Current Holding Price: $100,000
+- Coins Held: 1
+- Cash Available: $10,000
+- Cash Deploy %: 50%
+- 3 default levels: 10%, 20%, 30% dips with 20%, 30%, 50% allocations
 
 ## Usage
 
-1. Enter your trading pair name
-2. Set your anchor/starting price (reference point for dip calculations)
-3. Enter current market price (used to highlight reached dip levels)
-4. Input your existing coin holdings
-5. Set available cash and deployment percentage
-6. Configure dip levels with desired dip percentages and buy allocations
-7. View summary calculations for total spend, remaining cash, total coins, and average entry price
+1. **Manage Pairs**: Use the tab interface to add, switch, or remove trading pairs
+2. **Configure Scenario**: Enter pair name, anchor price, current price, holdings, and cash
+3. **Set Dip Levels**: Add and configure dip levels with desired percentages
+4. **View Summary**: Check total spend, remaining cash, total coins, and average entry price
+5. **Save & Share**: Save pairs or portfolios for later use, or export/import JSON files
 
 All changes are automatically saved to your browser's localStorage.
 
-## Future Plan
-
-### Priority 1: Core Improvements
-
-1. **Export/Import Functionality**
-   - Export calculator state as JSON
-   - Import saved scenarios
-   - Share configurations via URL parameters
-
-2. **Multiple Scenarios**
-   - Save multiple named scenarios
-   - Quick switch between scenarios
-   - Scenario comparison view
-
-3. **Enhanced Calculations**
-   - Support for existing cost basis (currently assumes anchor price)
-   - Profit/loss projections at different price targets
-   - ROI calculations per level
-
-### Priority 2: UX Enhancements
-
-4. **Level Reordering**
-   - Drag-and-drop to reorder levels
-   - Sort by dip % or buy %
-
-5. **Preset Templates**
-   - Common strategies (conservative, aggressive, DCA)
-   - Quick apply templates
-
-6. **Better Visualizations**
-   - Chart showing dip levels vs current price
-   - Visual representation of allocation distribution
-
-### Priority 3: Advanced Features
-
-7. **Price Alerts**
-   - Browser notifications when price hits dip levels
-   - Requires price API integration (optional)
-
-8. **Multi-Pair Support**
-   - Track multiple pairs in one session
-   - Tabbed interface for different pairs
-
-9. **Historical Tracking**
-   - Log executed buys
-   - Track actual vs planned performance
-
-### Technical Improvements
-
-- Add unit tests for calculation functions
-- Improve error handling for edge cases
-- Add keyboard shortcuts for common actions
-- Accessibility improvements (ARIA labels, keyboard navigation)
-
 ## Files Structure
 
-- `index.html`: Main HTML structure with form inputs and summary section
-- `app.js`: Core logic (331 lines) - state management, calculations, rendering
-- `style.css`: Styling (222 lines) - responsive design, card-based layout
+- `index.html`: Main HTML structure with form inputs, tabs, and summary section (162 lines)
+- `app.js`: Core logic - state management, calculations, rendering, pair/portfolio management (848 lines)
+- `style.css`: Styling - responsive design, card-based layout, tooltips, tabs (496 lines)
 - `README.md`: This documentation file
+- `Sample/`: Example JSON files for pair and portfolio configurations
 
 ## Technology
 
