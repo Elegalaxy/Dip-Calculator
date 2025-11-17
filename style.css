@@ -34,6 +34,11 @@ body {
   margin-bottom: 24px;
 }
 
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
 .hero h1 {
   margin: 0;
   line-height: 1.25;
@@ -103,6 +108,111 @@ input:focus {
   border-color: var(--accent);
 }
 
+/* Tooltip styles */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+@keyframes tooltipFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes tooltipFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Tooltips for label spans (above) */
+label span[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  white-space: normal;
+  width: max-content;
+  max-width: 280px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  opacity: 0;
+  animation: tooltipFadeInUp 0.2s ease-out forwards;
+}
+
+label span[data-tooltip]:hover::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #1e293b;
+  z-index: 1001;
+  pointer-events: none;
+  opacity: 0;
+  animation: tooltipFadeInUp 0.2s ease-out forwards;
+}
+
+/* Tooltips for table headers (below) */
+th[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: auto;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  white-space: normal;
+  width: max-content;
+  max-width: 280px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  opacity: 0;
+  animation: tooltipFadeInDown 0.2s ease-out forwards;
+}
+
+th[data-tooltip]:hover::before {
+  content: "";
+  position: absolute;
+  bottom: auto;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: transparent;
+  border-bottom-color: #1e293b;
+  z-index: 1001;
+  pointer-events: none;
+  opacity: 0;
+  animation: tooltipFadeInDown 0.2s ease-out forwards;
+}
+
 button {
   border: none;
   border-radius: 999px;
@@ -148,6 +258,7 @@ th {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  position: relative;
 }
 
 tbody tr:last-child td {
@@ -206,9 +317,153 @@ tbody tr:last-child td {
   font-size: 0.85rem;
 }
 
+/* Tabs styles */
+.tabs-section {
+  padding: 16px 20px;
+}
+
+.tabs-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.tabs-list {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.tab:hover {
+  background: #f1f5f9;
+  border-color: var(--accent);
+}
+
+.tab.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.tab-close {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  transition: background 0.2s;
+}
+
+.tab.active .tab-close {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.tab-close:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.tab.active .tab-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.add-tab-btn {
+  padding: 8px 16px;
+  border: 1px dashed var(--border);
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: all 0.2s;
+  min-width: 40px;
+}
+
+.add-tab-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #f8fafc;
+}
+
+.tab-actions,
+.portfolio-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.portfolio-actions {
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+select.ghost-button {
+  padding: 10px 36px 10px 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  min-width: 180px;
+}
+
+select.ghost-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232563eb' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+}
+
+select.ghost-button:focus {
+  outline: 2px solid rgba(37, 99, 235, 0.3);
+  border-color: var(--accent);
+}
+
+select.ghost-button option {
+  background: #fff;
+  color: #0f172a;
+}
+
 @media (max-width: 640px) {
   .hero {
     flex-direction: column;
+  }
+
+  .header-actions {
+    width: 100%;
   }
 
   button {
@@ -216,6 +471,25 @@ tbody tr:last-child td {
   }
 
   .level-input {
+    width: 100%;
+  }
+
+  .tabs-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tabs-list {
+    width: 100%;
+  }
+
+  .tab-actions,
+  .portfolio-actions {
+    flex-direction: column;
+  }
+
+  .tab-actions button,
+  .portfolio-actions button {
     width: 100%;
   }
 }

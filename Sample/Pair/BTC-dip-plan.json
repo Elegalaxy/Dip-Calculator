@@ -1,0 +1,25 @@
+{
+  "pairName": "BTC",
+  "anchorPrice": 115950.6,
+  "currentPrice": 102000,
+  "coinsHeld": 0.01,
+  "cashAvailable": 10000,
+  "cashDeployPercent": 100,
+  "levels": [
+    {
+      "id": "lvl-1",
+      "dipPercent": 10,
+      "buyPercent": 20
+    },
+    {
+      "id": "lvl-2",
+      "dipPercent": 20,
+      "buyPercent": 30
+    },
+    {
+      "id": "lvl-3",
+      "dipPercent": 30,
+      "buyPercent": 50
+    }
+  ]
+}

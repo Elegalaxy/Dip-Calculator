@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crypto Dip Buy Calculator</title>
+    <title>Dip Buy Calculator</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -11,41 +11,100 @@
       <header class="hero">
         <div>
           <p class="eyebrow">Mini Tool</p>
-          <h1>Crypto Dip Buy Calculator</h1>
+          <h1>Dip Buy Calculator</h1>
           <p class="subhead">
             Plan basic ladder orders with nothing more than HTML, CSS, and vanilla JavaScript.
           </p>
         </div>
-        <button id="reset-button" type="button" class="ghost-button">Reset Inputs</button>
+        <div class="header-actions">
+          <button id="reset-button" type="button" class="ghost-button">Reset Inputs</button>
+        </div>
       </header>
+
+      <section class="card tabs-section">
+        <div class="tabs-container">
+          <div class="tabs-list" id="tabs-list"></div>
+          <button id="add-tab" type="button" class="add-tab-btn" title="Add new pair">+</button>
+        </div>
+        <div class="tab-actions">
+          <button id="save-pair" type="button" class="ghost-button">Save Pair</button>
+          <select id="load-pair-select" class="ghost-button" style="display: none;">
+            <option value="">Select a pair to load...</option>
+          </select>
+          <button id="load-pair" type="button" class="ghost-button">Load Pair</button>
+          <button id="export-pair" type="button" class="ghost-button">Export Pair</button>
+          <button id="import-pair" type="button" class="ghost-button">Import Pair</button>
+          <input type="file" id="import-pair-file" accept=".json" style="display: none;" />
+        </div>
+        <div class="portfolio-actions">
+          <button id="save-portfolio" type="button" class="ghost-button">Save Portfolio</button>
+          <select id="load-portfolio-select" class="ghost-button" style="display: none;">
+            <option value="">Select a portfolio to load...</option>
+          </select>
+          <button id="load-portfolio" type="button" class="ghost-button">Load Portfolio</button>
+          <button id="export-portfolio" type="button" class="ghost-button">Export Portfolio</button>
+          <button id="import-portfolio" type="button" class="ghost-button">Import Portfolio</button>
+          <input type="file" id="import-portfolio-file" accept=".json" style="display: none;" />
+        </div>
+      </section>
 
       <main>
         <section class="card">
           <h2>Scenario</h2>
           <div class="form-grid">
             <label>
-              <span>Pair</span>
-              <input type="text" data-field="pairName" placeholder="BTC/USDT" />
+              <span data-tooltip="Trading pair name (e.g., BTC/USDT, ETH/USDT). Used for reference only.">Pair</span>
+              <input 
+                type="text" 
+                data-field="pairName" 
+                placeholder="BTC"
+              />
             </label>
             <label>
-              <span>Anchor / Starting Price</span>
-              <input type="number" min="0" step="0.01" data-field="anchorPrice" />
+              <span data-tooltip="Reference price used to calculate dip levels. All dip percentages are calculated from this price.">Anchor / Starting Price</span>
+              <input 
+                type="number" 
+                min="0" 
+                step="0.01" 
+                data-field="anchorPrice"
+              />
             </label>
             <label>
-              <span>Current Price</span>
-              <input type="number" min="0" step="0.01" data-field="currentPrice" />
+              <span data-tooltip="Current market price. Used to highlight which dip levels have been reached (shown in green).">Current Holding Price</span>
+              <input 
+                type="number" 
+                min="0" 
+                step="0.01" 
+                data-field="currentPrice"
+              />
             </label>
             <label>
-              <span>Coins Held</span>
-              <input type="number" min="0" step="0.0001" data-field="coinsHeld" />
+              <span data-tooltip="Your existing holdings of this coin. Included in total coins and average entry calculations.">Coins Held</span>
+              <input 
+                type="number" 
+                min="0" 
+                step="0.0001" 
+                data-field="coinsHeld"
+              />
             </label>
             <label>
-              <span>Cash Available (USD)</span>
-              <input type="number" min="0" step="1" data-field="cashAvailable" />
+              <span data-tooltip="Total USD cash available for buying. The deploy percentage determines how much will be allocated.">Cash Available (USD)</span>
+              <input 
+                type="number" 
+                min="0" 
+                step="1" 
+                data-field="cashAvailable"
+              />
             </label>
             <label>
-              <span>Cash % To Deploy</span>
-              <input type="number" min="0" max="100" step="1" data-field="cashDeployPercent" />
+              <span data-tooltip="Percentage of available cash to allocate across dip levels. For example, 80% means 80% of your cash will be distributed.">Cash % To Deploy</span>
+              <input 
+                type="number" 
+                min="0" 
+                max="100" 
+                step="1" 
+                data-field="cashDeployPercent"
+              />
             </label>
           </div>
         </section>
@@ -60,8 +119,8 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Dip %</th>
-                  <th>Buy %</th>
+                  <th data-tooltip="Percentage drop from anchor price. Example: 10% means buy when price drops 10% from anchor price.">Dip %</th>
+                  <th data-tooltip="Percentage of deployable cash to spend at this dip level. Total of all buy % should not exceed 100%.">Buy %</th>
                   <th>Dip Price</th>
                   <th>Buy $</th>
                   <th>Qty</th>
