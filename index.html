@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto Dip Buy Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Mini Tool</p>
+          <h1>Crypto Dip Buy Calculator</h1>
+          <p class="subhead">
+            Plan basic ladder orders with nothing more than HTML, CSS, and vanilla JavaScript.
+          </p>
+        </div>
+        <button id="reset-button" type="button" class="ghost-button">Reset Inputs</button>
+      </header>
+
+      <main>
+        <section class="card">
+          <h2>Scenario</h2>
+          <div class="form-grid">
+            <label>
+              <span>Pair</span>
+              <input type="text" data-field="pairName" placeholder="BTC/USDT" />
+            </label>
+            <label>
+              <span>Anchor / Starting Price</span>
+              <input type="number" min="0" step="0.01" data-field="anchorPrice" />
+            </label>
+            <label>
+              <span>Current Price</span>
+              <input type="number" min="0" step="0.01" data-field="currentPrice" />
+            </label>
+            <label>
+              <span>Coins Held</span>
+              <input type="number" min="0" step="0.0001" data-field="coinsHeld" />
+            </label>
+            <label>
+              <span>Cash Available (USD)</span>
+              <input type="number" min="0" step="1" data-field="cashAvailable" />
+            </label>
+            <label>
+              <span>Cash % To Deploy</span>
+              <input type="number" min="0" max="100" step="1" data-field="cashDeployPercent" />
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head">
+            <h2>Dip Levels</h2>
+            <button id="add-level" type="button">Add Level</button>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Dip %</th>
+                  <th>Buy %</th>
+                  <th>Dip Price</th>
+                  <th>Buy $</th>
+                  <th>Qty</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="levels-body"></tbody>
+            </table>
+          </div>
+          <p class="note" id="percent-warning"></p>
+        </section>
+
+        <section class="card">
+          <h2>Summary</h2>
+          <div class="summary-grid">
+            <article>
+              <h3>Total Spend</h3>
+              <p class="stat" id="total-spend">$0</p>
+            </article>
+            <article>
+              <h3>Remaining Cash</h3>
+              <p class="stat" id="remaining-cash">$0</p>
+            </article>
+            <article>
+              <h3>Total Coins</h3>
+              <p class="stat" id="total-coins">0</p>
+            </article>
+            <article>
+              <h3>Projected Avg Entry</h3>
+              <p class="stat" id="avg-entry">$0</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
