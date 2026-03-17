@@ -1,5 +1,5 @@
 # Dip Calculator
-
+https://elegalaxy.github.io/Dip-Calculator/
 A simple, vanilla HTML/CSS/JavaScript tool for planning crypto dip buy strategies. Calculate optimal entry points and allocations across multiple price levels.
 
 ## How to Run
