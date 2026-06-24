@@ -31,8 +31,8 @@ portfolio.pairs.forEach((pair, idx) => {
 const currencyFmt = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
+  minimumFractionDigits: 4,
+  maximumFractionDigits: 6,
 });
 
 const qtyFmt = new Intl.NumberFormat("en-US", {
